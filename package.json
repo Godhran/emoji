@@ -1,5 +1,6 @@
 {
   "name": "emoji",
+  "homepage": "http://emojo.godhran.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
