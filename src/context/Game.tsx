@@ -434,19 +434,15 @@ export function GameProvider({ children }: Provider) {
       for (let char of target.quote.replace(/[^a-zA-Z]/g, "").toLowerCase()) {
         uniqueCharacters.add(char);
       }
-      console.log(
-        Object.keys(emojis)[
-          Math.floor(Math.random() * Object.keys(emojis).length)
-        ]
-      );
+
       const randomEmojiSet =
         emojis[
           Object.keys(emojis)[
             Math.floor(Math.random() * Object.keys(emojis).length)
           ]
         ];
-      console.log({ randomEmojiSet });
-      const shuffledEmojis = randomEmojiSet
+
+        const shuffledEmojis = randomEmojiSet
         .sort(() => 0.5 - Math.random())
         .slice(0);
       const emojiCipher = {};
