@@ -9,7 +9,7 @@ function App() {
   const { target } = useGameContext();
 
   return (
-    <div className="App h-screen pl-3  pr-3">
+    <div className="App h-screen pl-3 pr-3">
       {target ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-between mx-auto">
           <HiddenWord />
