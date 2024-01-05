@@ -1,0 +1,136 @@
+.letter-input {
+  margin: 0 0.15rem;
+  padding: 0.5rem;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-size: 20px;
+  text-transform: lowercase;
+  font-weight: bolder !important;
+  border-radius: 10px;
+  font-family: "Major Mono Display", monospace;
+  border: none !important;
+  outline: none !important;
+}
+
+.next-button {
+  font-family: "Major Mono Display", sans-serif;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 10px 30px 10px 30px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.correct-answer {
+  animation: MoveUpDown 0.5s linear infinite;
+  position: relative;
+}
+
+.keyboard-key {
+  width: 30px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-family: "Major Mono Display", sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  cursor: pointer;
+  background-color: gray;
+  color: white;
+}
+
+.wrong-character {
+  background-color: red;
+  color: white;
+  cursor: auto;
+  animation: Shake 0.5s linear;
+}
+
+.correct-character {
+  background-color: green;
+  color: white;
+  cursor: auto;
+  animation: Bounce 0.5s linear;
+}
+
+@keyframes Shake {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-7.5px);
+  }
+  60% {
+    transform: translateX(-3.75px);
+  }
+}
+
+@keyframes Bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-7.5px);
+  }
+  60% {
+    transform: translateY(-3.75px);
+  }
+}
+
+.keyboard-key-special {
+  width: 45px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.keyboard-key-placeholder {
+  width: 30px;
+  height: 40px;
+  background-color: transparent;
+  color: transparent;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.keyboard-container {
+  max-width: 350px;
+}
+
+.keyboard-gradient {
+  height: 30px;
+  background-color: red;
+}
+
+@keyframes MoveUpDown {
+  0%,
+  100% {
+    top: -7.5px;
+  }
+  50% {
+    top: 5px;
+  }
+}
+

@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.hidden-letter {
+  height: 25px;
+  width: 25px;
+  margin-bottom: 5px;
+  margin-right: 2.5px;
+  background-color: grey;
+  color: white;
+  border-radius: 5px;
+}
+.space-letter {
+  background-color: transparent;
+}
+
+.guessed-letter {
+  background-color: grey;
+  position: relative;
+  animation: SucessfulGuess 1s linear, QuickBounce 0.5s linear;
+  color: white;
+  transition: all;
+  -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+  -moz-animation-fill-mode: forwards; /* FF 5+ */
+  -o-animation-fill-mode: forwards; /* Not implemented yet */
+  -ms-animation-fill-mode: forwards; /* IE 10+ */
+  animation-fill-mode: forwards;
+}
+
+@keyframes SucessfulGuess {
+  0% {
+    background-color: grey;
+    top: 0px;
+  }
+  25%,
+  75% {
+    background-color: green;
+    top: 5px;
+  }
+  100% {
+    background-color: grey;
+    top: 0px;
+  }
+}
+@keyframes QuickBounce {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: -5px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.solved-letter {
+  animation: Slither 0.5s linear, RemoveBackground 0.5s linear;
+  position: relative;
+  transition: all;
+  -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+  -moz-animation-fill-mode: forwards; /* FF 5+ */
+  -o-animation-fill-mode: forwards; /* Not implemented yet */
+  -ms-animation-fill-mode: forwards; /* IE 10+ */
+  animation-fill-mode: forwards;
+}
+
+@keyframes Slither {
+  0% {
+    top: -5px;
+  }
+  50% {
+    top: 5px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+.loading-letter {
+  animation: Slither 0.5s linear infinite;
+  position: relative;
+  transition: all;
+  -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+  -moz-animation-fill-mode: forwards; /* FF 5+ */
+  -o-animation-fill-mode: forwards; /* Not implemented yet */
+  -ms-animation-fill-mode: forwards; /* IE 10+ */
+  animation-fill-mode: forwards;
+  height: 25px;
+  width: 25px;
+  margin-bottom: 5px;
+  margin-right: 2.5px;
+  background-color: grey;
+  color: white;
+}
+
+@keyframes Slither {
+  0% {
+    top: -5px;
+  }
+  50% {
+    top: 5px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
+@keyframes RemoveBackground {
+  0% {
+    background-color: black;
+    opacity: 1;
+  }
+  100% {
+    /* background-color: transparent; */
+    background-color: transparent;
+    opacity: 0;
+    /* display: none;
+    height:0px;
+    width:0px; */
+  }
+}
+
+.author {
+  animation: RevealAuthor 1s linear;
+  position: relative;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes RevealAuthor {
+  0% {
+    position: relative;
+    transition: all;
+    -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+    -moz-animation-fill-mode: forwards; /* FF 5+ */
+    -o-animation-fill-mode: forwards; /* Not implemented yet */
+    -ms-animation-fill-mode: forwards; /* IE 10+ */
+    animation-fill-mode: forwards;
+    top: -50px;
+    opacity: 0;
+  }
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
+
+.collapse-word {
+  animation: Collapse 1s linear;
+  position: relative;
+  animation-fill-mode: forwards;
+}
+
+@keyframes Collapse {
+  0% {
+    /* background-color: gold; */
+    opacity: 1;
+  }
+  80% {
+    height: 100%;
+  }
+  100% {
+    height: 0;
+    /* display: none;
+    height:0px;
+    width:0px; */
+  }
+}
+
+.keyboard-solved {
+  animation-fill-mode: forwards;
+  animation: FadeDown 0.5s linear;
+  position: relative;
+  transition: all;
+  -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+  -moz-animation-fill-mode: forwards; /* FF 5+ */
+  -o-animation-fill-mode: forwards; /* Not implemented yet */
+  -ms-animation-fill-mode: forwards; /* IE 10+ */
+  animation-fill-mode: forwards;
+}
+
+@keyframes FadeDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+}
