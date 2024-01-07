@@ -1,7 +1,7 @@
 import { useGameContext } from "../../context";
 
 const SolvedWord = () => {
-  const { hasSolved, hasFailed, target, animationTiming } = useGameContext();
+  const { hasSolved, hasFailed, target, animationTiming, posterUrl } = useGameContext();
 
   return (
     <div>
@@ -14,7 +14,7 @@ const SolvedWord = () => {
         >
           <p className="font-bold mb-5">{target?.title}</p>
           <img
-            src={`https://www.themoviedb.org/t/p/original${target.poster_path}`}
+            src={`${posterUrl}${target.poster_path}`}
             className="object-scale-down h-96 rounded-md"
             alt={target?.title}
           />

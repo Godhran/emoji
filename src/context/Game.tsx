@@ -45,11 +45,10 @@ const initialState = {
   animationTiming: 0.0025,
   emojis: {},
   wrongGuesses: 0,
+  posterUrl: `https://www.themoviedb.org/t/p/original`,
 };
 
 type Target = {
-  // author: string;
-  // quote: string;
   genres: string[];
   overview: string;
   poster_path: string;
@@ -68,6 +67,7 @@ type Context = {
   animationTiming: number;
   emojis: any;
   wrongGuesses: number;
+  posterUrl: string;
 };
 
 type Provider = {
@@ -104,13 +104,11 @@ export function GameProvider({ children }: Provider) {
       !guessedCharacters.includes(character) &&
       wrongGuesses < maxWrongGuesses
     ) {
-      // if (!phraseArray.includes(character.toUpperCase()) || !phraseArray.includes(character.toLowerCase())) {
       if (
         !phraseArray.find(
           (element) => element.toLowerCase() === character.toLowerCase()
         )
       ) {
-        console.log({ phraseArray, character });
         setWrongGuesses(wrongGuesses + 1);
         if (wrongGuesses === maxWrongGuesses - 1) {
           setHasFailed(true);
@@ -129,14 +127,15 @@ export function GameProvider({ children }: Provider) {
   );
 
   const url = `https://emoji-api-drn1.onrender.com/movies`;
+  const posterUrl = initialState.posterUrl;
 
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = () => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-      // dev code
       setTarget({
         title: "Test Movie",
         genres: ["Development", "Testing"],
@@ -227,6 +226,7 @@ export function GameProvider({ children }: Provider) {
     animationTiming,
     emojis,
     wrongGuesses,
+    posterUrl
   };
 
   return (
