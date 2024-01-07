@@ -10,14 +10,14 @@ function App() {
 
   return (
     <div className="App h-screen pl-3 pr-3">
-      {target ? (
+      {!target ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-between mx-auto">
           <HiddenWord />
           <SolvedWord />
           <OnScreenKeyboard />
         </div>
       ) : null}
-      {!target ? (
+      {target ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-center mx-auto">
         <div className="mt-5">
           <p>

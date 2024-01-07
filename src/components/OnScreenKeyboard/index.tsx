@@ -40,7 +40,9 @@ const OnScreenKeyboard = () => {
           phraseArray?.indexOf(letter.toUpperCase());
 
         if (cipheredStringArray[index]) {
-          return cipheredStringArray[index];
+          console.log(cipheredStringArray[index])
+          // <img className="emoji" src="${emoji}" alt="Emoji"/>
+          return <img className="emoji" src={cipheredStringArray[index]} alt="Emoji"/>;
         }
         return "";
       }
@@ -57,7 +59,7 @@ const OnScreenKeyboard = () => {
           {keyRows.top.map((key, index) => (
             <div key={`${key}_${index}`} style={{ width: "100%" }}>
               <div
-                className={`${getKeyClass(key)} ${index > 0 ? "" : ""}`}
+                className={`${getKeyClass(key)} ${index > 0 ? "" : ""} flex flex-wrap`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}
@@ -75,7 +77,7 @@ const OnScreenKeyboard = () => {
             <div key={`${key}_${index}`}>
               <div
                 key={`${key}_${index}`}
-                className={`${getKeyClass(key)} ${index > 0 ? "" : ""}`}
+                className={`${getKeyClass(key)} ${index > 0 ? "" : ""} flex flex-wrap`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}
@@ -94,7 +96,7 @@ const OnScreenKeyboard = () => {
             <div key={`${key}_${index}`}>
               <div
                 key={`${key}_${index}`}
-                className={`${getKeyClass(key)} ${index > 0 ? "" : ""}`}
+                className={`${getKeyClass(key)} ${index > 0 ? "" : ""} flex flex-wrap`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}

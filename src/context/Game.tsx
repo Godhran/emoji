@@ -1,335 +1,37 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 
+const faceEmojis = require.context(
+  "../assets/images/emojis/faces",
+  true,
+  /\.(png)$/
+);
+const faceEmojiList = faceEmojis.keys().map((emoji) => faceEmojis(emoji));
+
+const animalEmojis = require.context(
+  "../assets/images/emojis/animals",
+  true,
+  /\.(png)$/
+);
+const animalEmojiList = animalEmojis.keys().map((emoji) => animalEmojis(emoji));
+
+const foodEmojis = require.context(
+  "../assets/images/emojis/food",
+  true,
+  /\.(png)$/
+);
+const foodEmojiList = foodEmojis.keys().map((emoji) => foodEmojis(emoji));
+
+const emojis: Emojis = {
+  food: foodEmojiList,
+  faces: faceEmojiList,
+  animals: animalEmojiList,
+};
+
 type Emojis = {
   faces: string[];
   food: string[];
   animals: string[];
   [key: string]: string[];
-};
-
-const emojis: Emojis = {
-  faces: [
-    "😀",
-    "😃",
-    "😄",
-    "😁",
-    "😆",
-    "😅",
-    "🤣",
-    "😂",
-    "🙂",
-    "😉",
-    "😊",
-    "😇",
-    "🥰",
-    "😍",
-    "🤩",
-    "😘",
-    "😗",
-    "😚",
-    "😙",
-    "🥲",
-    "😏",
-    "😋",
-    "😛",
-    "😜",
-    "🤪",
-    "😝",
-    "🤗",
-    "🤭",
-    "🫢",
-    "🫣",
-    "🤫",
-    "🤔",
-    "🫡",
-    "🤤",
-    "🤠",
-    "🥳",
-    "🥸",
-    "😎",
-    "🤓",
-    "🧐",
-    "🙃",
-    "🫠",
-    "🤐",
-    "🤨",
-    "😐",
-    "😑",
-    "😶",
-    "🫥",
-    "😶‍🌫️",
-    "😒",
-    "🙄",
-    "😬",
-    "😮‍💨",
-    "🤥",
-    "🫨",
-    "😌",
-    "😔",
-    "😪",
-    "😴",
-    "😷",
-    "🤒",
-    "🤕",
-    "🤢",
-    "🤮",
-    "🤧",
-    "🥵",
-    "🥶",
-    "🥴",
-    "😵",
-    "😵‍💫",
-    "🤯",
-    "🥱",
-    "😕",
-    "🫤",
-    "😟",
-    "🙁",
-    "😮",
-    "😯",
-    "😲",
-    "😳",
-    "🥺",
-    "🥹",
-    "😦",
-    "😧",
-    "😨",
-    "😰",
-    "😥",
-    "😢",
-    "😭",
-    "😱",
-    "😖",
-    "😣",
-    "😞",
-    "😓",
-    "😩",
-    "😫",
-    "😤",
-    "😡",
-    "😠",
-    "🤬",
-    "👿",
-    "😈",
-    "👿",
-    "💀",
-    "💩",
-    "🤡",
-    "👹",
-    "👺",
-    "👻",
-    "👽",
-    "👾",
-    "🤖",
-    "😺",
-    "😸",
-    "😹",
-    "😻",
-    "😼",
-    "😽",
-    "🙀",
-    "😿",
-    "😾",
-    "🙈",
-    "🙉",
-    "🙊",
-  ],
-  animals: [
-    "🐵",
-    "🐒",
-    "🦍",
-    "🦧",
-    "🐶",
-    "🐕",
-    "🦮",
-    "🐕‍🦺",
-    "🐩",
-    "🐺",
-    "🦊",
-    "🦝",
-    "🐱",
-    "🐈",
-    "🐈‍⬛",
-    "🦁",
-    "🐯",
-    "🐅",
-    "🐆",
-    "🐴",
-    "🫎",
-    "🫏",
-    "🐎",
-    "🦄",
-    "🦓",
-    "🦌",
-    "🦬",
-    "🐮",
-    "🐂",
-    "🐃",
-    "🐄",
-    "🐷",
-    "🐖",
-    "🐗",
-    "🐽",
-    "🐏",
-    "🐑",
-    "🐐",
-    "🐪",
-    "🐫",
-    "🦙",
-    "🦒",
-    "🐘",
-    "🦣",
-    "🦏",
-    "🦛",
-    "🐭",
-    "🐁",
-    "🐀",
-    "🐹",
-    "🐰",
-    "🐇",
-    "🐿️",
-    "🦫",
-    "🦔",
-    "🦇",
-    "🐻",
-    "🐻‍❄️",
-    "🐨",
-    "🐼",
-    "🦥",
-    "🦦",
-    "🦨",
-    "🦘",
-    "🦡",
-  ],
-  food: [
-    "🍇",
-    "🍈",
-    "🍉",
-    "🍊",
-    "🍋",
-    "🍌",
-    "🍍",
-    "🥭",
-    "🍎",
-    "🍏",
-    "🍐",
-    "🍑",
-    "🍒",
-    "🍓",
-    "🫐",
-    "🥝",
-    "🍅",
-    "🫒",
-    "🥥",
-    "🥑",
-    "🍆",
-    "🥔",
-    "🥕",
-    "🌽",
-    "🌶️",
-    "🫑",
-    "🥒",
-    "🥬",
-    "🥦",
-    "🧄",
-    "🧅",
-    "🥜",
-    "🫘",
-    "🌰",
-    "🫚",
-    "🫛",
-    "🍞",
-    "🥐",
-    "🥖",
-    "🫓",
-    "🥨",
-    "🥯",
-    "🥞",
-    "🧇",
-    "🧀",
-    "🍖",
-    "🍗",
-    "🥩",
-    "🥓",
-    "🍔",
-    "🍟",
-    "🍕",
-    "🌭",
-    "🥪",
-    "🌮",
-    "🌯",
-    "🫔",
-    "🥙",
-    "🧆",
-    "🥚",
-    "🍳",
-    "🥘",
-    "🍲",
-    "🫕",
-    "🥣",
-    "🥗",
-    "🍿",
-    "🧈",
-    "🧂",
-    "🥫",
-    "🍝",
-    "🍱",
-    "🍘",
-    "🍙",
-    "🍚",
-    "🍛",
-    "🍜",
-    "🍠",
-    "🍢",
-    "🍣",
-    "🍤",
-    "🍥",
-    "🥮",
-    "🍡",
-    "🥟",
-    "🥠",
-    "🥡",
-    "🍦",
-    "🍧",
-    "🍨",
-    "🍩",
-    "🍪",
-    "🎂",
-    "🍰",
-    "🧁",
-    "🥧",
-    "🍫",
-    "🍬",
-    "🍭",
-    "🍮",
-    "🍯",
-    "🍼",
-    "🥛",
-    "☕",
-    "🫖",
-    "🍵",
-    "🍶",
-    "🍾",
-    "🍷",
-    "🍸",
-    "🍹",
-    "🍺",
-    "🍻",
-    "🥂",
-    "🥃",
-    "🫗",
-    "🥤",
-    "🧋",
-    "🧃",
-    "🧉",
-    "🥢",
-    "🍽️",
-    "🍴",
-    "🥄",
-    "🔪",
-    "🫙",
-    "🏺",
-  ],
 };
 
 const initialState = {
@@ -395,7 +97,6 @@ export function GameProvider({ children }: Provider) {
 
   const url = `https://emoji-api-drn1.onrender.com`;
 
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -404,10 +105,10 @@ export function GameProvider({ children }: Provider) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        // setTarget({ quote: "This is a test quote", author: "Me" });
         setTarget(data);
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   };
 
   useEffect(() => {
@@ -435,6 +136,13 @@ export function GameProvider({ children }: Provider) {
         uniqueCharacters.add(char);
       }
 
+      // const randomEmojiSet =
+      //   emojis[
+      //     Object.keys(emojis)[
+      //       Math.floor(Math.random() * Object.keys(emojis).length)
+      //     ]
+      //   ];
+
       const randomEmojiSet =
         emojis[
           Object.keys(emojis)[
@@ -442,7 +150,7 @@ export function GameProvider({ children }: Provider) {
           ]
         ];
 
-        const shuffledEmojis = randomEmojiSet
+      const shuffledEmojis = randomEmojiSet
         .sort(() => 0.5 - Math.random())
         .slice(0);
       const emojiCipher = {};
@@ -465,7 +173,8 @@ export function GameProvider({ children }: Provider) {
             _cipheredStringArray.push(character);
           }
         });
-
+      console.log(_cipheredStringArray);
+      console.log(target.quote.split(""));
       setCipheredStringArray(_cipheredStringArray);
       setPhraseArray(target.quote.split(""));
       setAnimationTiming(1 / _cipheredStringArray.length);
