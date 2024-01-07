@@ -36,6 +36,7 @@ type Emojis = {
 
 const initialState = {
   hasSolved: false,
+  hasFailed: false,
   guessedCharacters: [],
   cipheredStringArray: [],
   phraseArray: [],
@@ -43,6 +44,7 @@ const initialState = {
   guessCharacter: (character: string) => {},
   animationTiming: 0.0025,
   emojis: {},
+  wrongGuesses: 0,
 };
 
 type Target = {
@@ -57,6 +59,7 @@ type Target = {
 
 type Context = {
   hasSolved: boolean;
+  hasFailed: boolean;
   guessedCharacters: string[];
   cipheredStringArray: string[] | null;
   phraseArray: string[] | null;
@@ -64,6 +67,7 @@ type Context = {
   guessCharacter: (character: string) => void;
   animationTiming: number;
   emojis: any;
+  wrongGuesses: number;
 };
 
 type Provider = {
@@ -76,6 +80,10 @@ export const useGameContext = () => useContext(GameContext);
 
 export function GameProvider({ children }: Provider) {
   const [hasSolved, setHasSolved] = useState<boolean>(initialState.hasSolved);
+  const [hasFailed, setHasFailed] = useState<boolean>(initialState.hasFailed);
+  const [wrongGuesses, setWrongGuesses] = useState<number>(
+    initialState.wrongGuesses
+  );
   const [guessedCharacters, setGuessedCharacters] = useState<string[]>(
     initialState.guessedCharacters
   );
@@ -87,8 +95,20 @@ export function GameProvider({ children }: Provider) {
     initialState.phraseArray
   );
   const [target, setTarget] = useState<Target>(initialState.target);
+
   const guessCharacter = (character: string) => {
-    if (!guessedCharacters.includes(character)) {
+    if (
+      phraseArray &&
+      !guessedCharacters.includes(character) &&
+      wrongGuesses < 3
+    ) {
+      if (!phraseArray.includes(character)) {
+        setWrongGuesses(wrongGuesses + 1);
+        if (wrongGuesses === 2) {
+          setHasFailed(true);
+        }
+      }
+
       setGuessedCharacters(() => {
         const _newGuessedCharacters = [...guessedCharacters, character];
         return _newGuessedCharacters;
@@ -107,12 +127,23 @@ export function GameProvider({ children }: Provider) {
   }, []);
 
   const fetchData = () => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setTarget(data);
-      })
-      .catch(() => {});
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+      // dev code
+      setTarget({
+        title: "Test Movie",
+        genres: ["Development", "Testing"],
+        poster_path: "",
+        release_date: "2024-01-01",
+        overview: "Testing environment test",
+      });
+    } else {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          setTarget(data);
+        })
+        .catch(() => {});
+    }
   };
 
   useEffect(() => {
@@ -139,13 +170,6 @@ export function GameProvider({ children }: Provider) {
       for (let char of target.title.replace(/[^a-zA-Z]/g, "").toLowerCase()) {
         uniqueCharacters.add(char);
       }
-
-      // const randomEmojiSet =
-      //   emojis[
-      //     Object.keys(emojis)[
-      //       Math.floor(Math.random() * Object.keys(emojis).length)
-      //     ]
-      //   ];
 
       const randomEmojiSet =
         emojis[
@@ -191,8 +215,10 @@ export function GameProvider({ children }: Provider) {
     phraseArray,
     target,
     hasSolved,
+    hasFailed,
     animationTiming,
     emojis,
+    wrongGuesses,
   };
 
   return (

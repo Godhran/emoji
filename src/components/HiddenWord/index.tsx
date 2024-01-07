@@ -7,6 +7,7 @@ const HiddenWord = () => {
     cipheredStringArray,
     phraseArray,
     hasSolved,
+    hasFailed,
     animationTiming,
     target,
   } = useGameContext();
@@ -29,7 +30,7 @@ const HiddenWord = () => {
       const letterClassName = `${
         emoji === " "
           ? "space-letter"
-          : hasSolved
+          : hasSolved || hasFailed
           ? "solved-letter"
           : isGuessed
           ? "guessed-letter hidden-letter"
@@ -58,15 +59,15 @@ const HiddenWord = () => {
   };
 
   return (
-    <div className={hasSolved ? "collapse-word" : ""}>
+    <div className={hasSolved || hasFailed ? "collapse-word" : ""}>
       <div className="flex flex-row flex-wrap max-w-[300px] mx-auto justify-center mt-5">
         {generatedGroupedHTML()}
       </div>
-      <div className={hasSolved ? "hidden" : ""}>
+      <div className={hasSolved || hasFailed ? "hidden" : ""}>
         {target?.genres.join(", ")}
       </div>
-      <div className={hasSolved ? "hidden" : ""}>
-        {target?.release_date.split('-')[0]}
+      <div className={hasSolved || hasFailed ? "hidden" : ""}>
+        {target?.release_date.split("-")[0]}
       </div>
     </div>
   );

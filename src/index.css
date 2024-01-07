@@ -25,6 +25,7 @@ code {
   color: white;
   border-radius: 5px;
 }
+
 .space-letter {
   background-color: transparent;
 }
@@ -212,3 +213,41 @@ code {
   width: 20px;
 }
 
+.strike-letter {
+  height: 40px;
+  width: 30px;
+  background-color: black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  animation-fill-mode: forwards;
+  animation: PopIn 0.5s linear;
+}
+
+.strike-placeholder {
+  height: 40px;
+  width: 30px;
+  border-width: 2px;
+  border-style: dashed;
+  animation-fill-mode: forwards;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 2px;
+}
+
+@keyframes PopIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

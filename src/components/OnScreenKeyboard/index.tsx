@@ -1,6 +1,8 @@
 import "../../App.css";
 import { useGameContext } from "../../context";
 import "../../styles/css/keyboard.css";
+import Emojo from "../../assets/images/web/emojo_32.png";
+import { useState } from "react";
 
 const keyRows = {
   top: ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -16,6 +18,8 @@ const OnScreenKeyboard = () => {
     cipheredStringArray,
     phraseArray,
     hasSolved,
+    hasFailed,
+    wrongGuesses,
   } = useGameContext();
 
   const getKeyClass = (letter: string) => {
@@ -23,6 +27,7 @@ const OnScreenKeyboard = () => {
       if (target?.title.toLowerCase().includes(letter.toLowerCase())) {
         return "keyboard-key correct-character";
       }
+
       return "keyboard-key wrong-character";
     }
     return "keyboard-key";
@@ -53,14 +58,43 @@ const OnScreenKeyboard = () => {
 
         return "";
       }
-      return "X";
+      return <img className="emoji" src={Emojo} alt="Wrong answer" />;
     }
 
     return letter;
   };
 
   return (
-    <div className={hasSolved ? "keyboard-solved grid w-full" : "grid w-full"}>
+    <div
+      className={
+        hasSolved || hasFailed ? "keyboard-solved grid w-full" : "grid w-full"
+      }
+    >
+      <div className="w-full h-[40px] flex flex-row justify-center mb-2">
+        <div className="flex flex-row justify-between align-center content-center h-[40px] w-32 self-auto">
+          {wrongGuesses > 0 ? (
+            <div className="strike-letter">
+              <img className="emoji" src={Emojo} alt="Wrong answer" />
+            </div>
+          ) : (
+            <div className="strike-placeholder" />
+          )}
+          {wrongGuesses > 1 ? (
+            <div className="strike-letter">
+              <img className="emoji" src={Emojo} alt="Wrong answer" />
+            </div>
+          ) : (
+            <div className="strike-placeholder" />
+          )}
+          {wrongGuesses > 2 ? (
+            <div className="strike-letter">
+              <img className="emoji" src={Emojo} alt="Wrong answer" />
+            </div>
+          ) : (
+            <div className="strike-placeholder" />
+          )}
+        </div>
+      </div>
       <div className={"keyboard-container mx-auto w-full"}>
         <div className={"flex flex-row justify-between"}>
           {keyRows.top.map((key, index) => (
