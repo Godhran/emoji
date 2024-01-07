@@ -76,6 +76,8 @@ type Provider = {
 
 const GameContext = createContext<Context>(initialState);
 
+const maxWrongGuesses = 3;
+
 export const useGameContext = () => useContext(GameContext);
 
 export function GameProvider({ children }: Provider) {
@@ -100,11 +102,17 @@ export function GameProvider({ children }: Provider) {
     if (
       phraseArray &&
       !guessedCharacters.includes(character) &&
-      wrongGuesses < 3
+      wrongGuesses < maxWrongGuesses
     ) {
-      if (!phraseArray.includes(character)) {
+      // if (!phraseArray.includes(character.toUpperCase()) || !phraseArray.includes(character.toLowerCase())) {
+      if (
+        !phraseArray.find(
+          (element) => element.toLowerCase() === character.toLowerCase()
+        )
+      ) {
+        console.log({ phraseArray, character });
         setWrongGuesses(wrongGuesses + 1);
-        if (wrongGuesses === 2) {
+        if (wrongGuesses === maxWrongGuesses - 1) {
           setHasFailed(true);
         }
       }

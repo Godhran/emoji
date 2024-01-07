@@ -2,7 +2,6 @@ import "../../App.css";
 import { useGameContext } from "../../context";
 import "../../styles/css/keyboard.css";
 import Emojo from "../../assets/images/web/emojo_32.png";
-import { useState } from "react";
 
 const keyRows = {
   top: ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
