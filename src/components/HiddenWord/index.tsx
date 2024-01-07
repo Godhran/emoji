@@ -65,6 +65,9 @@ const HiddenWord = () => {
       <div className={hasSolved ? "hidden" : ""}>
         {target?.genres.join(", ")}
       </div>
+      <div className={hasSolved ? "hidden" : ""}>
+        {target?.release_date.split('-')[0]}
+      </div>
     </div>
   );
 };
