@@ -10,21 +10,15 @@ function App() {
 
   return (
     <div className="App h-screen pl-3 pr-3">
-      {target && target.title ? (
+      {target ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-between mx-auto">
           <HiddenWord />
           <SolvedWord />
           <OnScreenKeyboard />
         </div>
       ) : null}
-      {!target || !target.title ? (
+      {!target ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-center mx-auto">
-          <div className="mt-5">
-            <p>
-              This project uses <a href="https://render.com/">Render.com</a> and
-              may take a minute or two for the free server instance to start up
-            </p>
-          </div>
           <Loading />
         </div>
       ) : null}

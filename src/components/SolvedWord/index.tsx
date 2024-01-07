@@ -19,7 +19,7 @@ const SolvedWord = () => {
           <p className="font-bold mb-5">{target?.title}</p>
           <img
             src={`https://www.themoviedb.org/t/p/original${target.poster_path}`}
-            className="object-scale-down h-96"
+            className="object-scale-down h-96 rounded-md"
             alt={target?.title}
           />
           <button
@@ -28,7 +28,6 @@ const SolvedWord = () => {
           >
             Go Again
           </button>
-          {/* <p className="italic">{target?.author}</p> */}
         </div>
       ) : null}
     </>

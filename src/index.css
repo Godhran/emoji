@@ -151,7 +151,7 @@ code {
     -o-animation-fill-mode: forwards; /* Not implemented yet */
     -ms-animation-fill-mode: forwards; /* IE 10+ */
     animation-fill-mode: forwards;
-    top: -50px;
+    top: 50px;
     opacity: 0;
   }
   100% {

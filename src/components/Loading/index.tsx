@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useGameContext } from "../../context";
-
+import emojo from "./../../assets/images/web/emojo_192.png";
 const Loading = () => {
   const { emojis } = useGameContext();
   const [emojiTicker, setEmojiTicker] = useState<number>(0);
@@ -15,6 +15,13 @@ const Loading = () => {
 
   return (
     <div className="flex flex-row flex-wrap max-w-[300px] mx-auto justify-center mt-5">
+      <img src={emojo} alt="Emojo" />
+      <div className="mt-5 mb-5">
+        <p>
+          This project uses <a href="https://render.com/">Render.com</a> and may
+          take a minute or two for the free server instance to start up
+        </p>
+      </div>
       {"Loading".split("").map((letter, index) => {
         const showEmoji = emojiTicker % (index + 1) === 1;
         let character: string | ReactNode = letter;
