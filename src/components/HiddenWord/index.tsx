@@ -45,7 +45,7 @@ const HiddenWord = () => {
         html += `<div class='flex flex-row'>`;
       }
 
-      html += `<div key="emoji_${index}" class="${letterClassName} flex justify-center align-center content-center flex-wrap" style="${`animation-delay:${
+      html += `<div key="emoji_${index}" class="${letterClassName} flex justify-center align-center content-center flex-wrap montserrat font-bold" style="${`animation-delay:${
         (hasSolved ? animationTiming : 0) * index
       }s`}">${
         isGuessed || /[^A-Za-z]/.test(character)
@@ -63,10 +63,10 @@ const HiddenWord = () => {
       <div className="flex flex-row flex-wrap max-w-[300px] mx-auto justify-center mt-5">
         {generatedGroupedHTML()}
       </div>
-      <div className={hasSolved || hasFailed ? "hidden" : ""}>
+      <div className={`${hasSolved || hasFailed ? "hidden" : ""} montserrat`}>
         {target?.genres.join(", ")}
       </div>
-      <div className={hasSolved || hasFailed ? "hidden" : ""}>
+      <div className={`${hasSolved || hasFailed ? "hidden" : ""} montserrat`}>
         {target?.release_date.split("-")[0]}
       </div>
     </div>

@@ -5,6 +5,10 @@ const Loading = () => {
   const { emojis } = useGameContext();
   const [emojiTicker, setEmojiTicker] = useState<number>(0);
 
+  const copy = {
+    loading: "Loading",
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setEmojiTicker(emojiTicker + 1);
@@ -22,7 +26,7 @@ const Loading = () => {
           take a minute or two for the free server instance to start up
         </p>
       </div>
-      {"Loading".split("").map((letter, index) => {
+      {copy.loading.split("").map((letter, index) => {
         const showEmoji = emojiTicker % (index + 1) === 1;
         let character: string | ReactNode = letter;
         if (showEmoji) {

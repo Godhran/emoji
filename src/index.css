@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;900&display=swap");
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -28,6 +29,12 @@ code {
 
 .space-letter {
   background-color: transparent;
+}
+
+a{
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .guessed-letter {
@@ -127,31 +134,31 @@ code {
     opacity: 1;
   }
   100% {
-    /* background-color: transparent; */
     background-color: transparent;
     opacity: 0;
-    /* display: none;
-    height:0px;
-    width:0px; */
   }
 }
 
-.author {
-  animation: RevealAuthor 1s linear;
+.movie {
+  animation: RevealMovie 1s linear;
   position: relative;
   animation-fill-mode: forwards;
   opacity: 0;
+  position: relative;
+  transition: all;
+  -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+  -moz-animation-fill-mode: forwards; /* FF 5+ */
+  -o-animation-fill-mode: forwards; /* Not implemented yet */
+  -ms-animation-fill-mode: forwards; /* IE 10+ */
+  animation-fill-mode: forwards;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
 }
 
-@keyframes RevealAuthor {
+@keyframes RevealMovie {
   0% {
-    position: relative;
-    transition: all;
-    -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
-    -moz-animation-fill-mode: forwards; /* FF 5+ */
-    -o-animation-fill-mode: forwards; /* Not implemented yet */
-    -ms-animation-fill-mode: forwards; /* IE 10+ */
-    animation-fill-mode: forwards;
     top: 50px;
     opacity: 0;
   }
@@ -169,7 +176,6 @@ code {
 
 @keyframes Collapse {
   0% {
-    /* background-color: gold; */
     opacity: 1;
   }
   80% {
@@ -177,9 +183,6 @@ code {
   }
   100% {
     height: 0;
-    /* display: none;
-    height:0px;
-    width:0px; */
   }
 }
 
@@ -250,4 +253,12 @@ code {
   100% {
     transform: scale(1);
   }
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.bebas {
+  font-family: "Bebas Neue", sans-serif;
 }

@@ -34,22 +34,16 @@ const OnScreenKeyboard = () => {
 
   const getKey = (letter: string) => {
     if (guessedCharacters.includes(letter.toLowerCase())) {
-      if (
-        target?.title.toLowerCase().includes(letter.toLowerCase()) &&
-        !!phraseArray &&
-        !!cipheredStringArray
-      ) {
-        let index = phraseArray?.indexOf(letter.toLowerCase());
+      if (target?.title.toLowerCase().includes(letter.toLowerCase())) {
+        const letterIndex = phraseArray.findIndex(
+          (item) => item.toLowerCase() === letter.toLowerCase()
+        );
 
-        if (index < 0) {
-          index = phraseArray?.indexOf(letter.toUpperCase());
-        }
-
-        if (cipheredStringArray[index]) {
+        if (cipheredStringArray[letterIndex]) {
           return (
             <img
               className="emoji"
-              src={cipheredStringArray[index]}
+              src={cipheredStringArray[letterIndex]}
               alt="Emoji"
             />
           );
@@ -57,9 +51,9 @@ const OnScreenKeyboard = () => {
 
         return "";
       }
+
       return <img className="emoji" src={Emojo} alt="Wrong answer" />;
     }
-
     return letter;
   };
 
@@ -101,7 +95,7 @@ const OnScreenKeyboard = () => {
               <div
                 className={`${getKeyClass(key)} ${
                   index > 0 ? "" : ""
-                }flex flex-wrap`}
+                }flex flex-wrap montserrat`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}
@@ -121,7 +115,7 @@ const OnScreenKeyboard = () => {
                 key={`${key}_${index}`}
                 className={`${getKeyClass(key)} ${
                   index > 0 ? "" : ""
-                } flex flex-wrap`}
+                } flex flex-wrap montserrat`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}
@@ -142,7 +136,7 @@ const OnScreenKeyboard = () => {
                 key={`${key}_${index}`}
                 className={`${getKeyClass(key)} ${
                   index > 0 ? "" : ""
-                } flex flex-wrap`}
+                } flex flex-wrap montserrat font-black`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}

@@ -2,22 +2,24 @@ import "./App.css";
 import HiddenWord from "./components/HiddenWord";
 import Loading from "./components/Loading";
 import OnScreenKeyboard from "./components/OnScreenKeyboard";
-import SolvedWord from "./components/SolvedWord";
+import Success from "./components/Success";
+import Failed from "./components/Failed";
 import { useGameContext } from "./context";
 
 function App() {
-  const { target } = useGameContext();
+  const { isLoading, hasSolved, hasFailed } = useGameContext();
 
   return (
     <div className="App h-screen pl-3 pr-3">
-      {target ? (
+      {!isLoading ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-between mx-auto">
           <HiddenWord />
-          <SolvedWord />
+          {hasSolved ? <Success /> : null}
+          {hasFailed ? <Failed /> : null}
           <OnScreenKeyboard />
         </div>
       ) : null}
-      {!target ? (
+      {isLoading ? (
         <div className="h-[500px] max-w-[500px] flex flex-col justify-center mx-auto">
           <Loading />
         </div>
