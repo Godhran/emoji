@@ -46,8 +46,13 @@ const initialState = {
 };
 
 type Target = {
-  author: string;
-  quote: string;
+  // author: string;
+  // quote: string;
+  genres: string[];
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
 } | null;
 
 type Context = {
@@ -95,7 +100,7 @@ export function GameProvider({ children }: Provider) {
     initialState.animationTiming
   );
 
-  const url = `https://emoji-api-drn1.onrender.com`;
+  const url = `https://emoji-api-drn1.onrender.com/movies`;
 
   useEffect(() => {
     fetchData();
@@ -105,14 +110,13 @@ export function GameProvider({ children }: Provider) {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // setTarget({ quote: "This is a test quote", author: "Me" });
         setTarget(data);
       })
       .catch(() => {});
   };
 
   useEffect(() => {
-    if (guessedCharacters.length > 0) {
+    if (guessedCharacters.length > 0 && phraseArray && phraseArray.length > 0) {
       const cleanPhraseArray = phraseArray
         ?.join("")
         .replace(/[^a-zA-Z]/g, "")
@@ -129,10 +133,10 @@ export function GameProvider({ children }: Provider) {
   }, [guessedCharacters, phraseArray]);
 
   useEffect(() => {
-    if (target && cipheredStringArray?.length === 0) {
+    if (target && cipheredStringArray?.length === 0 && target.title) {
       let uniqueCharacters = new Set();
 
-      for (let char of target.quote.replace(/[^a-zA-Z]/g, "").toLowerCase()) {
+      for (let char of target.title.replace(/[^a-zA-Z]/g, "").toLowerCase()) {
         uniqueCharacters.add(char);
       }
 
@@ -161,7 +165,7 @@ export function GameProvider({ children }: Provider) {
 
       let _cipheredStringArray: string[] = [];
 
-      target.quote
+      target.title
         .toLowerCase()
         .split("")
         .forEach((character) => {
@@ -173,13 +177,11 @@ export function GameProvider({ children }: Provider) {
             _cipheredStringArray.push(character);
           }
         });
-      console.log(_cipheredStringArray);
-      console.log(target.quote.split(""));
       setCipheredStringArray(_cipheredStringArray);
-      setPhraseArray(target.quote.split(""));
+      setPhraseArray(target.title.split(""));
       setAnimationTiming(1 / _cipheredStringArray.length);
     }
-  }, [target, target?.quote, cipheredStringArray]);
+  }, [target, target?.title, cipheredStringArray]);
 
   const exports = {
     guessedCharacters,

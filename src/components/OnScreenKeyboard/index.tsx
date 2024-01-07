@@ -15,12 +15,12 @@ const OnScreenKeyboard = () => {
     target,
     cipheredStringArray,
     phraseArray,
-    hasSolved
+    hasSolved,
   } = useGameContext();
 
   const getKeyClass = (letter: string) => {
     if (guessedCharacters.includes(letter.toLowerCase())) {
-      if (target?.quote.toLowerCase().includes(letter.toLowerCase())) {
+      if (target?.title.toLowerCase().includes(letter.toLowerCase())) {
         return "keyboard-key correct-character";
       }
       return "keyboard-key wrong-character";
@@ -31,35 +31,44 @@ const OnScreenKeyboard = () => {
   const getKey = (letter: string) => {
     if (guessedCharacters.includes(letter.toLowerCase())) {
       if (
-        target?.quote.toLowerCase().includes(letter.toLowerCase()) &&
-        phraseArray &&
-        cipheredStringArray
+        target?.title.toLowerCase().includes(letter.toLowerCase()) &&
+        !!phraseArray &&
+        !!cipheredStringArray
       ) {
-        const index =
-          phraseArray?.indexOf(letter.toLowerCase()) ||
-          phraseArray?.indexOf(letter.toUpperCase());
+        let index = phraseArray?.indexOf(letter.toLowerCase());
+
+        if (index < 0) {
+          index = phraseArray?.indexOf(letter.toUpperCase());
+        }
 
         if (cipheredStringArray[index]) {
-          console.log(cipheredStringArray[index])
-          // <img className="emoji" src="${emoji}" alt="Emoji"/>
-          return <img className="emoji" src={cipheredStringArray[index]} alt="Emoji"/>;
+          return (
+            <img
+              className="emoji"
+              src={cipheredStringArray[index]}
+              alt="Emoji"
+            />
+          );
         }
+
         return "";
       }
-      return "";
+      return "X";
     }
 
     return letter;
   };
 
   return (
-    <div className={hasSolved?"keyboard-solved grid w-full":"grid w-full"}>
+    <div className={hasSolved ? "keyboard-solved grid w-full" : "grid w-full"}>
       <div className={"keyboard-container mx-auto w-full"}>
         <div className={"flex flex-row justify-between"}>
           {keyRows.top.map((key, index) => (
             <div key={`${key}_${index}`} style={{ width: "100%" }}>
               <div
-                className={`${getKeyClass(key)} ${index > 0 ? "" : ""} flex flex-wrap`}
+                className={`${getKeyClass(key)} ${
+                  index > 0 ? "" : ""
+                }flex flex-wrap`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}
@@ -77,7 +86,9 @@ const OnScreenKeyboard = () => {
             <div key={`${key}_${index}`}>
               <div
                 key={`${key}_${index}`}
-                className={`${getKeyClass(key)} ${index > 0 ? "" : ""} flex flex-wrap`}
+                className={`${getKeyClass(key)} ${
+                  index > 0 ? "" : ""
+                } flex flex-wrap`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}
@@ -96,7 +107,9 @@ const OnScreenKeyboard = () => {
             <div key={`${key}_${index}`}>
               <div
                 key={`${key}_${index}`}
-                className={`${getKeyClass(key)} ${index > 0 ? "" : ""} flex flex-wrap`}
+                className={`${getKeyClass(key)} ${
+                  index > 0 ? "" : ""
+                } flex flex-wrap`}
                 onClick={() => guessCharacter(key)}
               >
                 {getKey(key)}

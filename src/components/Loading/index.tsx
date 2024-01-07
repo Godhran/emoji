@@ -33,6 +33,7 @@ const Loading = () => {
         }
         return (
           <div
+            key={`loading-key-${index}`}
             className="loading-letter flex flex-wrap justify-center content-center"
             style={{ animationDelay: `${(1 / 7) * index}s` }}
           >
