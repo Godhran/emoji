@@ -8,6 +8,7 @@ const HiddenWord = () => {
     phraseArray,
     hasSolved,
     animationTiming,
+    target,
   } = useGameContext();
 
   if (
@@ -60,6 +61,9 @@ const HiddenWord = () => {
     <div className={hasSolved ? "collapse-word" : ""}>
       <div className="flex flex-row flex-wrap max-w-[300px] mx-auto justify-center mt-5">
         {generatedGroupedHTML()}
+      </div>
+      <div className={hasSolved ? "hidden" : ""}>
+        {target?.genres.join(", ")}
       </div>
     </div>
   );
