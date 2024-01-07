@@ -1,13 +1,31 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useGameContext } from "../../context";
 import emojo from "./../../assets/images/web/emojo_192.png";
+
+const copy = {
+  loading: "Loading",
+};
+
 const Loading = () => {
   const { emojis } = useGameContext();
   const [emojiTicker, setEmojiTicker] = useState<number>(0);
+  const [hasWaitedDelay, setHasWaitedDelay] = useState<boolean>(false);
 
-  const copy = {
-    loading: "Loading",
-  };
+  useEffect(() => {
+    let loadingTimer: NodeJS.Timeout;
+
+    const waitToConfirmLoading = () => {
+      loadingTimer = setTimeout(() => {
+        setHasWaitedDelay(true);
+      }, 1000);
+    };
+
+    waitToConfirmLoading();
+
+    return () => {
+      clearTimeout(loadingTimer);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,6 +34,10 @@ const Loading = () => {
 
     return () => clearInterval(interval);
   }, [emojiTicker]);
+
+  if (!hasWaitedDelay) {
+    return <></>;
+  }
 
   return (
     <div className="flex flex-row flex-wrap max-w-[300px] mx-auto justify-center mt-5">

@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
 import config from "../config";
+
 const faceEmojis = require.context(
   "../assets/images/emojis/faces",
   true,

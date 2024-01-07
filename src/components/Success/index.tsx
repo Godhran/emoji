@@ -6,16 +6,16 @@ const reload = () => {
   window.location.reload();
 };
 
+const copy = {
+  button: "Go again",
+};
+
 const Success = () => {
   const { target, animationTiming } = useGameContext();
   const [showSynopsis, setShowSynopsis] = useState<boolean>(false);
 
   const toggleSynopsis = () => {
     setShowSynopsis(!showSynopsis);
-  };
-
-  const copy = {
-    button: "Go again",
   };
 
   return (
